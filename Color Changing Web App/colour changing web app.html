@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My App</title>
+    <meta name="viewport" content="width=device-width,
+                                   initial-scale=1.0,
+                                   maximum-scale=1.0,
+                                   user-scalable=no,
+                                   minimal-ui">
+    <link rel="stylesheet" href="app.min.css">
+    <style>
+      ul.colour-picker li{
+        position: relative;
+        display: block;
+        width: 25%;
+        height: 54px;
+        float: left;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+      ul.colour-picker li[data-colour="teal"]{
+        background-color: #289;
+      }
+      ul.colour-picker li[data-colour="teal"]{
+        background-color: #289;
+      }
+      ul.colour-picker li[data-colour="green"]{
+        background-color: #3c7;
+      }
+      ul.colour-picker li[data-colour="yellow"]{
+        background-color: #ec1;
+      }
+      ul.colour-picker li[data-colour="orange"]{
+        background-color: #e82;
+      }
+      ul.colour-picker li[data-colour="red"]{
+        background-color: #e54;
+      }
+      ul.colour-picker li[data-colour="blue"]{
+        background-color: #39d;
+      }
+      ul.colour-picker li[data-colour="dark-blue"]{
+        background-color: #345;
+      }
+      ul.colour-picker li[data-colour="white"]{
+        background-color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-page" data-page="home">
+      <div class="app-topbar"></div>
+      <div class="app-content">
+        <ul class="colour-picker">
+          <li data-colour="teal"></li>
+          <li data-colour="green"></li>
+          <li data-colour="yellow"></li>
+          <li data-colour="orange"></li>
+          <li data-colour="red"></li>
+          <li data-colour="blue"></li>
+          <li data-colour="dark-blue"></li>
+          <li data-colour="white"></li>
+        </ul>
+      </div>
+    </div>
+    <script src="zepto.js"></script>
+    <script src="app.min.js"></script>
+    <script>
+      App.controller('home', function (page) {
+        setcolour(page);
+      });
+      var oldcolour="";
+
+  
+  
+      
+      function setcolour(page) {
+        $(page).find('ul.colour-picker li')
+        .clickable()
+        .on('click', function() {
+         var colour = $(this).data("colour");
+         if (oldcolour !== "") {
+            $(".app-topbar").removeClass(oldcolour);
+          }
+          $(".app-topbar").addClass(colour);
+          oldcolour = colour;
+         });
+       }
+
+    
+      try{
+        App.reload();
+      }
+      catch(err){
+        App.load("home");
+      }
+    </script>
+  </body>
+</html>
